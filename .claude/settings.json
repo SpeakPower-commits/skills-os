@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|clear|compact",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"$CLAUDE_PROJECT_DIR/os.ps1\" boot",
+            "timeout": 60,
+            "statusMessage": "Booting Skills OS"
+          }
+        ]
+      }
+    ]
+  }
+}

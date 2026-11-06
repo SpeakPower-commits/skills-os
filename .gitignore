@@ -1,0 +1,16 @@
+# Machine-local files. They describe this PC, not the OS, so they stay out of the backup.
+
+# Claude app approval records for this PC
+.claude/settings.local.json
+
+# Session worktrees the Claude app may create inside the repo
+.claude/worktrees/
+
+# os.ps1 state for this PC, rebuilt by `os scan` and `os install`
+registry/.fingerprint
+registry/installed.json
+
+# Windows clutter
+Thumbs.db
+desktop.ini
+~$*

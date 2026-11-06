@@ -1,0 +1,118 @@
+{
+  "_about": "Hand-maintained. The tools agents act with. os scan turns this into TOOLS.md; os tools install registers every 'claude-code' tool for all projects. Never put API keys here: every hosted tool signs in with OAuth.",
+  "tools": {
+    "apify": {
+      "use_for": "Scraping at scale: thousands of ready-made scrapers (Actors) for Google Maps, social media, e-commerce, search results and directories. Lead lists, competitor prices, reviews, social posts.",
+      "not_for": "One page or one small site; use firecrawl",
+      "fallback": "firecrawl, or composio's web tools",
+      "connect": "claude-code",
+      "server": { "type": "http", "url": "https://mcp.apify.com?tools=actors,docs,apify/rag-web-browser&telemetry-enabled=false" },
+      "auth": "OAuth: sign in to your Apify account in the browser on first use. No key is stored.",
+      "requires": [],
+      "cost": "Runs spend Apify credits. Check an Actor's pricing before a large run.",
+      "approval": "Ask Tom before a run likely to exceed the free tier.",
+      "docs": "https://docs.apify.com/platform/integrations/mcp",
+      "verified": "2026-11-06: docs read; endpoint answers 401 (sign-in required)."
+    },
+    "firecrawl": {
+      "use_for": "Turning websites into clean markdown or structured JSON: scrape a page, map or crawl a site, search the web and read the results, extract fields.",
+      "not_for": "Platforms that need a logged-in browser; use playwright. Bulk platform scraping; use apify",
+      "fallback": "the built-in browser for single pages",
+      "connect": "claude-code",
+      "server": { "type": "http", "url": "https://mcp.firecrawl.dev/v2/mcp-oauth" },
+      "auth": "OAuth: sign in to your Firecrawl account on first use. No key is stored.",
+      "requires": [],
+      "cost": "Firecrawl credits per page. Crawls can be large; set a page limit.",
+      "approval": "Ask Tom before crawling more than about 100 pages.",
+      "docs": "https://docs.firecrawl.dev/mcp-server",
+      "verified": "2026-11-06: docs read; endpoint reachable (405 on plain GET, as expected for MCP)."
+    },
+    "composio": {
+      "use_for": "Acting in 250+ apps: Gmail, Outlook, Calendar, Sheets, Drive, Notion, Slack, HubSpot, LinkedIn, Instagram and more. Always search its tools first, then check the app has an active connection.",
+      "not_for": "Apps that have their own connector here (Gmail, Canva); prefer those",
+      "fallback": "the app's own connector, or ask Tom to paste the data",
+      "connect": "claudeai",
+      "auth": "Already connected on claude.ai. Each app inside it (Gmail, Slack...) needs its own connection; COMPOSIO_MANAGE_CONNECTIONS gives Tom a sign-in link.",
+      "requires": [],
+      "cost": "Composio plan limits apply.",
+      "approval": "Reading is fine. Sending, posting, creating or deleting anything in an app needs Tom's explicit OK.",
+      "docs": "https://docs.composio.dev",
+      "verified": "2026-11-06: connected; Gmail inside Composio not yet connected."
+    },
+    "chrome-devtools": {
+      "use_for": "Diagnosing a web page in real Chrome: console errors, network requests, performance traces, screenshots. Use it to find why a site is slow or broken.",
+      "not_for": "Long scripted flows across many pages; use playwright",
+      "fallback": "the built-in browser (console and network reading)",
+      "connect": "claude-code",
+      "server": { "type": "stdio", "command": "cmd", "args": ["/c", "npx", "-y", "chrome-devtools-mcp@latest", "--no-usage-statistics"] },
+      "auth": "None. Uses its own Chrome profile, not Tom's.",
+      "requires": ["node"],
+      "cost": "Free.",
+      "approval": "Do not log in to Tom's accounts or submit forms without his OK.",
+      "docs": "https://github.com/ChromeDevTools/chrome-devtools-mcp",
+      "verified": "2026-11-06: Connected per `claude mcp list`, running on portable Node.js 26.13.0 in the user folder."
+    },
+    "playwright": {
+      "use_for": "Driving a browser step by step: multi-page flows, form filling, testing a web app end to end, capturing pages that need clicks or scrolling.",
+      "not_for": "Reading a public page; use firecrawl. Diagnosing performance; use chrome-devtools",
+      "fallback": "the built-in browser",
+      "connect": "claude-code",
+      "server": { "type": "stdio", "command": "cmd", "args": ["/c", "npx", "-y", "@playwright/mcp@latest", "--browser", "chrome"] },
+      "auth": "None. Uses its own browser profile, not Tom's.",
+      "requires": ["node"],
+      "cost": "Free.",
+      "approval": "Do not log in, buy, submit or post without Tom's OK.",
+      "docs": "https://github.com/microsoft/playwright-mcp",
+      "verified": "2026-11-06: Connected per `claude mcp list`, running on portable Node.js 26.13.0 in the user folder."
+    },
+    "higgsfield": {
+      "use_for": "Generating images and short videos for campaigns, ads, social posts and video scenes.",
+      "not_for": "Layouts with text, brand templates or carousels; use canva",
+      "fallback": "canva, or a written brief for a designer",
+      "connect": "claude-code",
+      "server": { "type": "http", "url": "https://mcp.higgsfield.ai/mcp" },
+      "auth": "OAuth: sign in to your Higgsfield account on first use. No key is stored.",
+      "requires": [],
+      "cost": "Generations spend Higgsfield credits; video costs far more than images.",
+      "approval": "Confirm the brief with Tom before a video generation or any batch.",
+      "docs": "https://higgsfield.ai",
+      "verified": "2026-11-06: no official docs page found; endpoint taken from third-party guides and confirmed live (401 with an OAuth challenge)."
+    },
+    "gmail": {
+      "use_for": "Reading, searching, labelling and drafting in Tom's Gmail. The first choice for /inbox.",
+      "not_for": "Other mailboxes; use composio (Outlook) or pasted text",
+      "fallback": "composio Gmail, or pasted email text",
+      "connect": "claudeai",
+      "auth": "Connected on claude.ai.",
+      "requires": [],
+      "cost": "Free.",
+      "approval": "Drafting is fine. Sending, archiving, labelling or deleting needs Tom's explicit OK.",
+      "docs": "",
+      "verified": "2026-11-06: Gmail connector tools present in sessions."
+    },
+    "canva": {
+      "use_for": "Designs with layout and text: social graphics, carousels, posters, one-pagers, decks, brand templates.",
+      "not_for": "Photoreal images or video generation; use higgsfield",
+      "fallback": "a written design brief",
+      "connect": "claudeai",
+      "auth": "Connected on claude.ai.",
+      "requires": [],
+      "cost": "Canva plan.",
+      "approval": "Publishing or sharing a design needs Tom's OK.",
+      "docs": "",
+      "verified": "2026-11-06: Canva connector tools present in sessions."
+    },
+    "browser": {
+      "use_for": "The Claude app's built-in browser: open pages, click, fill, read console and network. Needs no install, so it backs up playwright and chrome-devtools.",
+      "not_for": "Large scraping jobs; use apify or firecrawl",
+      "fallback": "firecrawl for reading",
+      "connect": "builtin",
+      "auth": "Tom's sign-ins in the pane belong to him; never sign out or change them.",
+      "requires": [],
+      "cost": "Free.",
+      "approval": "Same rules as any browser: no purchases, posts or form submissions without Tom's OK.",
+      "docs": "",
+      "verified": "2026-11-06: available in the desktop app."
+    }
+  }
+}
