@@ -83,12 +83,12 @@
       "not_for": "Other mailboxes; use composio (Outlook) or pasted text",
       "fallback": "composio Gmail, or pasted email text",
       "connect": "claudeai",
-      "auth": "Connected on claude.ai.",
+      "auth": "Connected on claude.ai. In a session this is the claude.ai Gmail connector: search_threads, get_thread, list_drafts, create_draft and the rest, behind a connector-ID prefix (mcp__<id>__). It also has send_message, reply, forward and trash tools, which need Tom's yes. The small-business plugin loads a second Gmail server (mcp__plugin_small-business_gmail__*) with no send tool; it is not this entry.",
       "requires": [],
       "cost": "Free.",
       "approval": "Drafting is fine. Sending, archiving, labelling or deleting needs Tom's explicit OK.",
       "docs": "",
-      "verified": "2026-11-06: Gmail connector tools present in sessions."
+      "verified": "2026-11-06: used for the first live /inbox run (search, read threads, labels, drafts)."
     },
     "canva": {
       "use_for": "Designs with layout and text: social graphics, carousels, posters, one-pagers, decks, brand templates.",

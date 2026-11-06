@@ -8,7 +8,7 @@ Run every task through these six steps, in order.
 
 1. **Observe the goal.** Restate in one line what Tom wants and what "done" looks like. If the request can reasonably be read two ways, ask once.
 2. **Observe the context.** Use `context/OWNER.md` for who Tom is, how he works and his voice. Read the venture's entry in `portfolio/PROJECTS.md` and any related entries in `knowledge/`. If the task touches a project, open that project's own files.
-3. **Pick the skill.** Match the request to a command in `registry/ROUTES.md` and start with its lead skill. If nothing fits, run `os.cmd find <words>`.
+3. **Pick the skill.** Match the request to a command in `registry/ROUTES.md` and start with its lead skill. If nothing fits, run `& '<OS home>\os.cmd' find <words>` (OS home is given under **Tool** below).
 4. **Think.** Follow the skill's method. Choose tools from `registry/TOOLS.md`. Before acting, state your assumptions, the risks, and the metric that will prove success.
 5. **Act.** Use the tools.
    - Check a tool is actually loaded in your session before relying on it. If it isn't, say so and use its fallback.
@@ -41,7 +41,12 @@ The skill listing an agent sees is capped, so most installed skills appear as a 
 
 ## Tool
 
-`os.cmd status | scan | find | check | tools | new | promote | retire | install | uninstall | rehome`
+OS home: `C:\Users\tom.otieno\Desktop\OS`.
+
+- The tool is `os.cmd` in that folder. It is not on PATH, and agent shells don't run programs from the current folder, so a bare `os` or `os.cmd` fails.
+- From PowerShell, run `& '<OS home>\os.cmd' <verb>`.
+- From Git Bash, run `'<OS home>/os.cmd' <verb>`.
+- Verbs: `status | scan | find | check | tools | new | promote | retire | install | uninstall | rehome`.
 
 ## Where things live
 

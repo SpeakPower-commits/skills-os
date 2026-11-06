@@ -4,7 +4,7 @@ description: Triage Tom's email into decisions, ready drafts and handoffs across
 metadata:
   domain: operations
   command: inbox
-  version: "1.0.0"
+  version: "1.1.0"
   builds-on: small-business:inbox-manager
 ---
 
@@ -25,13 +25,25 @@ Decide what this run is for: a full sweep, one thread, "did I miss anything", or
 
 Use the first source that works:
 
-1. **The Gmail connector:** search threads, read threads, labels and drafts.
+1. **The Gmail connector:** the claude.ai Gmail connector.
+   - Its tools (`search_threads`, `get_thread`, `get_message`, `list_labels`, `list_drafts`, `create_draft`) sit behind a connector-ID prefix.
+   - It also has send, reply, forward and trash tools. Never call those without Tom's yes.
+   - The small-business plugin's Gmail server (`mcp__plugin_small-business_gmail__*`) is a different server. Use it only if the connector fails, and confirm the mailbox first.
 2. **Composio Gmail or Outlook.**
    - Run `COMPOSIO_SEARCH_TOOLS` and check the app shows an active connection.
    - If it doesn't, call `COMPOSIO_MANAGE_CONNECTIONS` and give Tom the sign-in link.
 3. **Pasted or forwarded text.** This is a full mode, not a fallback. Ask once: "What did you promise anyone in the last two weeks?"
 
 Read the metadata first. Open full threads only for likely "Needs Tom" or "Drafted" items.
+
+**Querying Gmail**
+
+- Page by date with `after:` and `before:`, not by `category:`. The connector applies category filters unreliably.
+- Count each window with `THREAD_VIEW_IDS_ONLY`, which is cheap and exact. List it with `THREAD_VIEW_MINIMAL`.
+- A 50-thread `THREAD_VIEW_SUMMARY` page can overflow the tool output and be saved to a file. Parse that file with PowerShell `ConvertFrom-Json`; this PC has no jq or Python.
+- Search `in:sent` for the window first. A thread is unanswered when its latest message is not from Tom.
+- Check spam (`in:spam`) and archived mail (`-in:inbox -in:sent`) for anything from a person.
+- Threads that come back empty are automated Anthropic account emails, which the connector withholds. Count them as Handled; don't chase them.
 
 ## 4. Think: sort and rank
 
@@ -43,6 +55,19 @@ Tag every thread with a venture: UBF/FoB, SpeakPower, Tonninyira, CuePointe, Ten
 | Drafted | A reply is ready for his yes. Most mail lands here |
 | Handoff | Mail that belongs to another OS command (table below) |
 | Handled | Receipts, newsletters and notifications. Counted, not listed |
+
+**Scan service notices before counting them**
+
+A notification goes into Handled only after this check:
+
+- Look for:
+  - pauses and suspensions;
+  - cancellations, charges and failed payments;
+  - expiring trials;
+  - new sign-ins and app authorisations.
+- When a connector exists for the system that sent the alert (Supabase, Canva or GitHub, for example), check its live state with a read-only call before ranking it. Alert emails go stale in both directions.
+- Put money, client systems and data at risk in Needs Tom.
+- A sign-in that matches Tom's own activity is Handled, with a one-line note. A match means it came in the same minute as a sign-up, or with a code he had already opened.
 
 **Ranking "Needs Tom"**
 
@@ -94,7 +119,7 @@ For each item, give:
 3. **Drafted:** a table of recipient, subject and one-line gist, with the full draft text below each row.
 4. **Handoffs:** what went where, and the phrase that picks it up.
 5. **Handled:** a count by category.
-6. **One closing question:** which drafts to save or send.
+6. **One closing question:** which drafts to save or send. With no drafts, close on the top Needs Tom decision instead.
 
 ## 7. Tidy, only with Tom's OK
 

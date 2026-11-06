@@ -507,8 +507,17 @@ function Get-UserMcpNames {
 }
 
 function Test-Requirement([string]$Req) {
-  if ($Req -eq 'node') { return [bool](Get-Command npx -ErrorAction SilentlyContinue) }
-  return $true
+  if ($Req -ne 'node') { return $true }
+  if (Get-Command npx -ErrorAction SilentlyContinue) { return $true }
+  # This process's PATH can predate the Node install. The tools start as `cmd /c npx`,
+  # which a freshly started Claude app resolves from the saved user and machine PATH.
+  $saved = @([Environment]::GetEnvironmentVariable('Path', 'User'), [Environment]::GetEnvironmentVariable('Path', 'Machine')) -join ';'
+  foreach ($dir in @($saved -split ';' | Where-Object { $_.Trim() })) {
+    try {
+      if (Test-Path -LiteralPath (Join-Path ([Environment]::ExpandEnvironmentVariables($dir.Trim())) 'npx.cmd')) { return $true }
+    } catch { }
+  }
+  return $false
 }
 
 function Get-ToolState([string]$Name, $Tool, $UserMcp) {
@@ -850,10 +859,12 @@ function Get-AllIssues($Cat, $Routes) {
     }
   }
 
-  # Commands and agents carry the OS location so they work from other projects.
+  # Commands, agents and AGENTS.md carry the OS location so they work from other projects.
   $homeFiles = @()
   if (Test-Path $P.LiveSkills) { $homeFiles += @(Get-ChildItem $P.LiveSkills -Recurse -Filter 'SKILL.md' -File) }
   if (Test-Path $P.LiveAgents) { $homeFiles += @(Get-ChildItem $P.LiveAgents -Filter '*.md' -File) }
+  $agentsMd = Join-Path $OsHome 'AGENTS.md'
+  if (Test-Path $agentsMd) { $homeFiles += @(Get-Item $agentsMd) }
   foreach ($f in $homeFiles) {
     $m = [regex]::Match((Read-Text $f.FullName), 'OS home: `([^`]+)`')
     if ($m.Success -and $m.Groups[1].Value -ne $OsHome) {
@@ -958,7 +969,7 @@ function Invoke-Boot {
   $issues = @(Get-AllIssues $cat $routes)
   $errors = @($issues | Where-Object { $_.StartsWith('E ') })
   $warns = @($issues | Where-Object { $_.StartsWith('W ') })
-  Write-Output "Skills OS online: $($cat.counts.skills) callable skills, $($cat.counts.commands) commands, $($cat.counts.agents) agents. Route with registry/ROUTES.md; search with: os find <words>."
+  Write-Output "Skills OS online: $($cat.counts.skills) callable skills, $($cat.counts.commands) commands, $($cat.counts.agents) agents. Route with registry/ROUTES.md; search with: & '$(Join-Path $OsHome 'os.cmd')' find <words>."
   foreach ($c in @($script:LastChanges | Select-Object -First 8)) { Write-Output "Changed: $c" }
   foreach ($e in @($errors | Select-Object -First 5)) { Write-Output "OS error: $($e.Substring(2))" }
   $unclassified = @($warns | Where-Object { $_ -match 'unclassified|no domain' })
@@ -1037,6 +1048,8 @@ function Invoke-Rehome {
   $files = @()
   if (Test-Path $P.LiveSkills) { $files += @(Get-ChildItem $P.LiveSkills -Recurse -Filter 'SKILL.md' -File) }
   if (Test-Path $P.LiveAgents) { $files += @(Get-ChildItem $P.LiveAgents -Filter '*.md' -File) }
+  $agentsMd = Join-Path $OsHome 'AGENTS.md'
+  if (Test-Path $agentsMd) { $files += @(Get-Item $agentsMd) }
   foreach ($f in $files) {
     $t = Read-Text $f.FullName
     $n = [regex]::Replace($t, 'OS home: `[^`]+`', { param($m) 'OS home: `' + $OsHome + '`' })
