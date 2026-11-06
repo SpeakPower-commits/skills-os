@@ -78,6 +78,24 @@ Or just ask in plain words. To check on the system, open a terminal in this fold
 | Learned something worth keeping | `/learn ...`. Repeated lessons become skill improvements |
 | Moved this folder | `.\os rehome` |
 
+## Backup
+
+This folder is a Git repository, so any change here can be undone. Pushing sends your commits to a private GitHub repo, so the work survives a lost PC.
+
+After you or an agent change anything here, open a terminal in this folder and run:
+
+```
+git add -A
+git commit -m "Say what changed"
+git push
+```
+
+- **Check before you commit:** `git status` lists changed files and `git diff` shows the edits.
+- **Throw away an edit you haven't committed:** `git restore <file>`.
+- **Undo a committed change:** find it with `git log --oneline`, then run `git revert <id>`. That adds a commit reversing it, so nothing is lost.
+- **Left out on purpose:** your Claude app approvals (`.claude/settings.local.json`) and this PC's install state (`registry/.fingerprint`, `registry/installed.json`), which `.\os scan` and `.\os install` rebuild.
+- **On a new PC:** clone the repo into `Desktop\OS`, then run `.\os rehome`, `.\os install` and `.\os tools install`.
+
 ## Everywhere, not just here
 
 Commands, skills and agents are installed in your personal Claude folder, so they work in every project. The connectors are registered for every project too. Always edit in this folder: each `.\os scan` copies your changes out. `.\os uninstall` and `.\os tools remove <name>` reverse the installs.
