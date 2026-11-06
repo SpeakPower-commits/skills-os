@@ -13,6 +13,15 @@ Entry format:
 - Revisit if: what would reopen it
 ```
 
+## 2026-11-06: Back up the Skills OS to a private GitHub repo
+- Venture: all
+- Decision: Keep `Desktop\OS` under Git and push it to the private repo `github.com/SpeakPower-commits/skills-os`, on Tom's personal account (formerly `cuepointe`). Commits use a repo-local identity: Tom Otieno with his Gmail. `.gitignore` keeps out machine-local state: `.claude/settings.local.json`, `registry/.fingerprint`, `registry/installed.json` and session worktrees. The generated registry files stay in, for their history.
+- Over: A repo under the CuePointe organisation named in the brief; organisation members can see private repos, and `cuepointe` turned out to be Tom's own account, now renamed. OneDrive, which is the UBF work account. Git on this PC only, which would be lost with the PC.
+- Why: The Desktop isn't synced, and agent edits to skills need to be undoable. Tom chose the private personal repo and the commit identity himself on 2026-11-06.
+- Outcome: The first push was on 2026-11-06. Local and GitHub `main` matched at `ebb6245`, a logged-out check after the push returned 404 (private), and a credential scan of everything pushed was clean. The repo was first created public, and the push waited until Tom made it private.
+- How to use: After changes, run `git add -A`, `git commit -m "what changed"` and `git push` in the folder, as the README's "Backup" section says. Confirm a remote is private before the first push to it.
+- Revisit if: the repo stops being private, or the OS moves to a synced drive.
+
 ## 2026-11-06: POLSSE angles belong to one SpeakPower pillar
 - Venture: SpeakPower
 - Decision: POLSSE sub-angles (Politics, Law, Security, Socioeconomics and related) rotate through the Public Speaking / Storytelling pillar only.
