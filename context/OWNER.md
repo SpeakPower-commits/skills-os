@@ -9,7 +9,8 @@ Who every agent works for. The facts here come from Tom's own skills and files. 
 - Runs several ventures at once. Details are in `portfolio/PROJECTS.md`.
   - **UBF / Friends of Biodiversity:** communications strategy, FoB Green Card membership, and internal systems (Procurement & Logistics, HR PAR).
   - **SpeakPower:** his communications-audit and public-speaking consultancy. Offer order: audits and strategy first, coaching second, software builds third.
-  - **Tonninyira**; **CuePointe** (his GitHub organisation); the **Tender Bid / AI-native ERP** concept.
+  - **Tonninyira**; **CuePointe** (a venture name, including the CuePointe Action Pool); the **Tender Bid / AI-native ERP** concept.
+  - **GitHub:** all his repos live under the user account `SpeakPower-commits`. There is no CuePointe organisation on GitHub.
   - **Client work**, for example SCRSDO.
 
 ## How he works

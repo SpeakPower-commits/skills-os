@@ -701,12 +701,21 @@ function Get-Fingerprint {
   return ($parts -join "`n")
 }
 
+# True when two catalog texts differ only in their "generated" timestamp.
+function Test-SameApartFromStamp([string]$Path, [string]$NewText) {
+  if (-not (Test-Path $P.Catalog)) { return $false }
+  $pattern = '"generated":\s*"[^"]*"'
+  return ([regex]::Replace((Read-Text $Path), $pattern, '') -ceq [regex]::Replace($NewText, $pattern, ''))
+}
+
 function Invoke-Scan {
   param([switch]$Quiet)
   $old = $null
   if (Test-Path $P.Catalog) { try { $old = Read-Text $P.Catalog | ConvertFrom-Json } catch { $old = $null } }
   $cat = Build-Catalog
-  Write-Text $P.Catalog ($cat | ConvertTo-Json -Depth 6)
+  # Only rewrite when the content changed, so a no-op scan leaves Git clean.
+  $json = $cat | ConvertTo-Json -Depth 6
+  if (-not (Test-SameApartFromStamp $P.Catalog $json)) { Write-Text $P.Catalog $json }
   # Round-trip so every reader sees the same shape.
   $cat = Read-Text $P.Catalog | ConvertFrom-Json
   $routes = Get-Routes
@@ -942,7 +951,7 @@ function Invoke-Status {
   $installed = 'this folder only'
   if (Test-Path $P.Installed) { $installed = 'every project (installed to ~/.claude)' }
   Write-Output "Skills OS   $OsHome"
-  Write-Output "Last scan   $($cat.generated)"
+  Write-Output "Changed     $($cat.generated) (last time the catalog changed)"
   Write-Output "Commands    $($cat.counts.commands)"
   Write-Output "Your skills $($cat.counts.owned) live, $lab in the lab"
   Write-Output "Your agents $osAgents (plus $($cat.counts.agents - $osAgents) from plugins)"

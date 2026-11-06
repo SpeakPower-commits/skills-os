@@ -20,7 +20,7 @@ Tom builds and maintains production systems entirely through the browser — no 
   - Hybrid: Supabase for auth (Google OAuth) + relational data, GitHub as archival/document layer (used by UBF HR PAR)
   - Full Supabase: Postgres backend behind a single-file HTML/CSS/JS front end (used by Tonninyira)
 - **Compute layer:** Cloudflare Workers for anything needing server-side logic beyond static hosting.
-- **Hosting:** GitHub Pages, under the CuePointe GitHub organization.
+- **Hosting:** GitHub Pages, under Tom's GitHub user account `SpeakPower-commits`. There is no `cuepointe` account on GitHub (checked 2026-11-06).
 - **Build constraint:** everything must be buildable and deployable from a browser. Never propose a solution requiring a local CLI, package manager, or IDE unless Tom explicitly says he's working from a different machine.
 
 ## Non-Negotiable Rules
