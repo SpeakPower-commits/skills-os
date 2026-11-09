@@ -1,5 +1,5 @@
 {
-  "_about": "Hand-maintained. The tools agents act with. os scan turns this into TOOLS.md; os tools install registers every 'claude-code' tool for all projects. Never put API keys here: every hosted tool signs in with OAuth.",
+  "_about": "Hand-maintained. The tools agents act with. os scan turns this into TOOLS.md; os tools install registers every 'claude-code' tool for all projects. connect is one of: claude-code (the OS registers it), claudeai (a claude.ai connector), builtin (part of the Claude app), external (configured elsewhere on this PC, such as the Claude Desktop config or a project's .mcp.json; os scan finds those and flags any not listed here). Never put API keys here: every hosted tool signs in with OAuth.",
   "tools": {
     "apify": {
       "use_for": "Scraping at scale: thousands of ready-made scrapers (Actors) for Google Maps, social media, e-commerce, search results and directories. Lead lists, competitor prices, reviews, social posts.",

@@ -75,6 +75,7 @@ Or just ask in plain words. To check on the system, open a terminal in this fold
 | Finished a draft skill | `.\os promote my-skill-name`. It refuses until the draft is complete and has test prompts |
 | A skill is obsolete | `.\os retire my-skill-name`. It moves to `archive\` and is never deleted |
 | Want a new tool | Add it to `registry\tools.json`, then run `.\os tools install` |
+| Added a connector some other way (Claude Desktop, `claude mcp add`, a project's `.mcp.json`) | Nothing at first. The next session flags it. Then use `/os` to register it with its rules, or remove it |
 | Learned something worth keeping | `/learn ...`. Repeated lessons become skill improvements |
 | Moved this folder | `.\os rehome` |
 

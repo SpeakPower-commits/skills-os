@@ -391,6 +391,7 @@ function Build-Catalog {
     agents = @($agents | Sort-Object origin, id)
     collisions = $collisions
     accountStamps = $accountStamp
+    connectors = @(Get-ConnectorRecords)
   }
 }
 
@@ -496,14 +497,85 @@ function Get-Tools {
   return $null
 }
 
-# MCP servers registered for all projects in ~/.claude.json. Read only; the Claude CLI does the writing.
+# Connectors (MCP servers) configured on this PC, wherever they were added. Read only.
+$script:McpCache = $null
+
+# One safe line about a server: its transport plus host or package name. Never env, headers or other
+# arguments, because those can hold keys, and this line lands in the catalog that is pushed to GitHub.
+function Get-McpSummary($Cfg) {
+  if ($null -eq $Cfg) { return 'unknown' }
+  $url = [string]$Cfg.url
+  if ($url) {
+    $kind = [string]$Cfg.type
+    if (-not $kind) { $kind = 'http' }
+    try { return "$kind $(([Uri]$url).Host)" } catch { return $kind }
+  }
+  $pkg = @(@($Cfg.args) | Where-Object {
+      ($_ -is [string]) -and $_.Length -le 80 -and ($_.StartsWith('@') -or $_ -match '(?i)mcp') -and
+      $_ -match '^@?[A-Za-z0-9][A-Za-z0-9._-]*(/[A-Za-z0-9._-]+)?(@[A-Za-z0-9._^~-]+)?$'
+    } | Select-Object -First 1)
+  if ($pkg.Count -gt 0) { return "stdio $($pkg[0])" }
+  $cmd = [string]$Cfg.command
+  if ($cmd) { return "stdio $(Split-Path $cmd -Leaf)" }
+  return 'unknown'
+}
+
+# Every connector outside plugins: user and local scope in ~/.claude.json, the .mcp.json of each
+# project Claude Code has opened, and the Claude Desktop config. Plugin connectors are tracked with plugins.
+function Get-ConfiguredMcp {
+  if ($null -ne $script:McpCache) { return $script:McpCache }
+  $found = New-Object System.Collections.ArrayList
+  $add = { param($Name, $Source, $Cfg) [void]$found.Add([pscustomobject]@{ name = [string]$Name; source = [string]$Source; summary = (Get-McpSummary $Cfg) }) }
+  if (Test-Path $P.UserConfig) {
+    try {
+      $j = Read-Text $P.UserConfig | ConvertFrom-Json
+      if ($j.mcpServers) { foreach ($s in $j.mcpServers.PSObject.Properties) { & $add $s.Name 'user' $s.Value } }
+      if ($j.projects) {
+        foreach ($proj in $j.projects.PSObject.Properties) {
+          $leaf = Split-Path $proj.Name -Leaf
+          if ($proj.Value.mcpServers) { foreach ($s in $proj.Value.mcpServers.PSObject.Properties) { & $add $s.Name "local:$leaf" $s.Value } }
+          $file = Join-Path $proj.Name '.mcp.json'
+          if (Test-Path -LiteralPath $file) {
+            try {
+              $m = Read-Text $file | ConvertFrom-Json
+              if ($m.mcpServers) { foreach ($s in $m.mcpServers.PSObject.Properties) { & $add $s.Name "project:$leaf" $s.Value } }
+            } catch { }
+          }
+        }
+      }
+    } catch { }
+  }
+  $desktop = Join-Path $env:APPDATA 'Claude\claude_desktop_config.json'
+  if (Test-Path $desktop) {
+    try {
+      $d = Read-Text $desktop | ConvertFrom-Json
+      if ($d.mcpServers) { foreach ($s in $d.mcpServers.PSObject.Properties) { & $add $s.Name 'claude-desktop' $s.Value } }
+    } catch { }
+  }
+  $script:McpCache = @($found | Sort-Object source, name)
+  return $script:McpCache
+}
+
+# MCP servers registered for all projects in ~/.claude.json. The Claude CLI does the writing.
 function Get-UserMcpNames {
-  if (-not (Test-Path $P.UserConfig)) { return @() }
-  try {
-    $j = Read-Text $P.UserConfig | ConvertFrom-Json
-    if ($j.mcpServers) { return @($j.mcpServers.PSObject.Properties.Name) }
-  } catch { }
+  return @(Get-ConfiguredMcp | Where-Object { $_.source -eq 'user' } | ForEach-Object { $_.name })
+}
+
+function Get-ToolNames {
+  $t = Get-Tools
+  if ($t -and $t.tools) { return @($t.tools.PSObject.Properties.Name) }
   return @()
+}
+
+# Connectors configured on this PC that registry/tools.json says nothing about.
+function Get-UnregisteredMcp {
+  $names = @(Get-ToolNames)
+  return @(Get-ConfiguredMcp | Where-Object { $names -notcontains $_.name })
+}
+
+function Get-ConnectorRecords {
+  $names = @(Get-ToolNames)
+  return @(Get-ConfiguredMcp | ForEach-Object { [pscustomobject]@{ name = $_.name; source = $_.source; summary = $_.summary; registered = ($names -contains $_.name) } })
 }
 
 function Test-Requirement([string]$Req) {
@@ -533,6 +605,11 @@ function Get-ToolState([string]$Name, $Tool, $UserMcp) {
       return @{ ready = $false; text = 'not set up: run os tools install' }
     }
     'claudeai' { return @{ ready = $true; text = 'claude.ai connector' } }
+    'external' {
+      $where = @(Get-ConfiguredMcp | Where-Object { $_.name -eq $Name } | ForEach-Object { $_.source })
+      if ($where.Count -gt 0) { return @{ ready = $true; text = "configured outside the OS ($($where -join ', '))" } }
+      return @{ ready = $false; text = 'not found in any config on this PC' }
+    }
     'builtin' { return @{ ready = $true; text = 'built into the Claude app' } }
   }
   return @{ ready = $false; text = "unknown connect method '$($Tool.connect)'" }
@@ -592,6 +669,17 @@ function Write-ToolsDoc($Routes) {
   }
   [void]$b.AppendLine()
   [void]$b.AppendLine('Sign-in, costs and approval rules for each tool are in `registry/tools.json`. Live status: `os.cmd tools`.')
+  $loose = @(Get-UnregisteredMcp)
+  if ($loose.Count -gt 0) {
+    [void]$b.AppendLine()
+    [void]$b.AppendLine('## Connectors not yet registered')
+    [void]$b.AppendLine()
+    [void]$b.AppendLine('These are configured on this PC but have no entry in `registry/tools.json`, so there are no rules yet for when to use them. Ask Tom before relying on one.')
+    [void]$b.AppendLine()
+    [void]$b.AppendLine('| Connector | Configured in | What it is |')
+    [void]$b.AppendLine('|---|---|---|')
+    foreach ($c in $loose) { [void]$b.AppendLine("| ``$($c.name)`` | $($c.source) | $($c.summary) |") }
+  }
   Write-Text $P.ToolsMd $b.ToString()
 }
 
@@ -614,6 +702,12 @@ function Invoke-Tools([string[]]$Words) {
       $state = Get-ToolState $prop.Name $prop.Value $userMcp
       Write-Output ('{0,-16} {1}' -f $prop.Name, $state.text)
     }
+    $loose = @(Get-UnregisteredMcp)
+    if ($loose.Count -gt 0) {
+      Write-Output ''
+      Write-Output 'Not in the registry yet (added outside the OS):'
+      foreach ($c in $loose) { Write-Output ('{0,-16} {1}: {2}' -f $c.name, $c.source, $c.summary) }
+    }
     return
   }
   $cli = Find-ClaudeCli
@@ -629,6 +723,7 @@ function Invoke-Tools([string[]]$Words) {
       $json = ($t.server | ConvertTo-Json -Compress -Depth 5).Replace('"', '\"')
       Write-Output "$($prop.Name): $(Invoke-ClaudeCli $cli @('mcp', 'add-json', '--scope', 'user', $prop.Name, $json))"
     }
+    $script:McpCache = $null
     Invoke-Scan -Quiet
     Write-Output 'New tools load in new sessions. Sign in to each one when it first asks, or with /mcp.'
     return
@@ -639,6 +734,7 @@ function Invoke-Tools([string[]]$Words) {
     $t = Get-Prop $tools.tools $name
     if (-not $t -or [string]$t.connect -ne 'claude-code') { throw "'$name' is not a tool this OS sets up." }
     Write-Output (Invoke-ClaudeCli $cli @('mcp', 'remove', '--scope', 'user', $name))
+    $script:McpCache = $null
     Invoke-Scan -Quiet
     return
   }
@@ -668,6 +764,15 @@ function Write-Changes($Old, $New) {
     $newAgents = @($New.agents | ForEach-Object { $_.id })
     foreach ($i in $newAgents) { if ($oldAgents -notcontains $i) { [void]$lines.Add("$stamp  + agent   $i") } }
     foreach ($i in $oldAgents) { if ($newAgents -notcontains $i) { [void]$lines.Add("$stamp  - agent   $i") } }
+    $newConn = @($New.connectors | ForEach-Object { "$($_.name) ($($_.source))" })
+    if ($null -eq $Old.PSObject.Properties['connectors']) {
+      $loose = @($New.connectors | Where-Object { -not $_.registered }).Count
+      [void]$lines.Add("$stamp  connectors: $($newConn.Count) configured, $loose not in the registry")
+    } else {
+      $oldConn = @($Old.connectors | ForEach-Object { "$($_.name) ($($_.source))" })
+      foreach ($k in $newConn) { if ($oldConn -notcontains $k) { [void]$lines.Add("$stamp  + connector $k") } }
+      foreach ($k in $oldConn) { if ($newConn -notcontains $k) { [void]$lines.Add("$stamp  - connector $k") } }
+    }
   }
   if ($lines.Count -gt 0) {
     $existing = ''
@@ -698,6 +803,8 @@ function Get-Fingerprint {
   foreach ($f in @($P.Routes, $P.Tools, $PSCommandPath)) {
     if ($f -and (Test-Path $f)) { [void]$parts.Add("$f|" + (Get-Item $f).LastWriteTimeUtc.Ticks) }
   }
+  # Connector configs live in files that change for other reasons, so compare what they declare.
+  foreach ($c in @(Get-ConfiguredMcp)) { [void]$parts.Add("mcp|$($c.source)|$($c.name)|$($c.summary)") }
   return ($parts -join "`n")
 }
 
@@ -806,7 +913,7 @@ function Get-AllIssues($Cat, $Routes) {
   if ($toolsJson -and $toolsJson.tools) {
     foreach ($prop in $toolsJson.tools.PSObject.Properties) {
       $t = $prop.Value
-      if (@('claude-code', 'claudeai', 'builtin') -notcontains [string]$t.connect) { & $add "E tool '$($prop.Name)' has connect '$($t.connect)'; use claude-code, claudeai or builtin" }
+      if (@('claude-code', 'claudeai', 'builtin', 'external') -notcontains [string]$t.connect) { & $add "E tool '$($prop.Name)' has connect '$($t.connect)'; use claude-code, claudeai, builtin or external" }
       if ([string]$t.connect -eq 'claude-code' -and -not $t.server) { & $add "E tool '$($prop.Name)' connects through Claude Code but has no server entry" }
       if (-not $t.use_for) { & $add "E tool '$($prop.Name)' has no use_for, so agents cannot tell when to pick it" }
       $blob = ($t | ConvertTo-Json -Depth 6 -Compress)
@@ -845,6 +952,9 @@ function Get-AllIssues($Cat, $Routes) {
   }
   foreach ($s in @($Cat.skills | Where-Object { $_.origin -eq 'owned' -and $_.domain -eq 'unclassified' })) {
     & $add "W owned skill '$($s.id)' has no domain"
+  }
+  foreach ($c in @(Get-UnregisteredMcp)) {
+    & $add "W connector '$($c.name)' ($($c.source): $($c.summary)) is not in registry/tools.json. Register it so agents know when to use it"
   }
 
   # Name collisions that have no decision yet.
@@ -981,7 +1091,7 @@ function Invoke-Boot {
   Write-Output "Skills OS online: $($cat.counts.skills) callable skills, $($cat.counts.commands) commands, $($cat.counts.agents) agents. Route with registry/ROUTES.md; search with: & '$(Join-Path $OsHome 'os.cmd')' find <words>."
   foreach ($c in @($script:LastChanges | Select-Object -First 8)) { Write-Output "Changed: $c" }
   foreach ($e in @($errors | Select-Object -First 5)) { Write-Output "OS error: $($e.Substring(2))" }
-  $unclassified = @($warns | Where-Object { $_ -match 'unclassified|no domain' })
+  $unclassified = @($warns | Where-Object { $_ -match 'unclassified|no domain|not in registry/tools.json' })
   foreach ($w in @($unclassified | Select-Object -First 3)) { Write-Output "OS needs a decision: $($w.Substring(2))" }
   $notReady = @(Get-ToolsNotReady)
   if ($notReady.Count -gt 0) { Write-Output "Tools not ready: $($notReady -join ', '). Use their fallbacks in registry/TOOLS.md." }
@@ -1133,7 +1243,7 @@ os status             One-screen health summary (default)
 os scan               Rebuild the catalog and routes from what is installed
 os find <words>       Search every skill. Add --all to include reference docs
 os check              Validate skills, agents, routes and tools. Exits 1 on errors
-os tools              Show which tools (MCP connectors) are ready
+os tools              Show which tools are ready, and any connectors added outside the OS
 os tools install      Register the OS's MCP connectors for every project
 os tools remove <n>   Unregister one of them
 os new <name>         Start a draft skill in lab/

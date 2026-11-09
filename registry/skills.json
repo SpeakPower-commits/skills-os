@@ -1,5 +1,5 @@
 {
-    "generated":  "2026-11-06 13:50",
+    "generated":  "2026-11-09 07:50",
     "home":  "C:\\Users\\tom.otieno\\Desktop\\OS",
     "counts":  {
                    "skills":  313,
@@ -8,7 +8,7 @@
                    "owned":  6,
                    "agents":  18,
                    "plugins":  22,
-                   "connectorsPending":  57
+                   "connectorsPending":  58
                },
     "plugins":  [
                     {
@@ -167,7 +167,7 @@
                         "agents":  0,
                         "domain":  "documents",
                         "connectorsPending":  [
-
+                                                  "pdf"
                                               ]
                     },
                     {
@@ -5549,5 +5549,43 @@
                           "video-content-director":  "2026-08-26T05:56:48.700018Z",
                           "speakpower-comms-strategist":  "2026-09-17T20:06:57.046690Z",
                           "ubf-comms-strategist":  "2026-07-21T15:23:11.456034Z"
-                      }
+                      },
+    "connectors":  [
+                       {
+                           "name":  "filesystem",
+                           "source":  "claude-desktop",
+                           "summary":  "stdio @modelcontextprotocol/server-filesystem",
+                           "registered":  false
+                       },
+                       {
+                           "name":  "apify",
+                           "source":  "user",
+                           "summary":  "http mcp.apify.com",
+                           "registered":  true
+                       },
+                       {
+                           "name":  "chrome-devtools",
+                           "source":  "user",
+                           "summary":  "stdio chrome-devtools-mcp@latest",
+                           "registered":  true
+                       },
+                       {
+                           "name":  "firecrawl",
+                           "source":  "user",
+                           "summary":  "http mcp.firecrawl.dev",
+                           "registered":  true
+                       },
+                       {
+                           "name":  "higgsfield",
+                           "source":  "user",
+                           "summary":  "http mcp.higgsfield.ai",
+                           "registered":  true
+                       },
+                       {
+                           "name":  "playwright",
+                           "source":  "user",
+                           "summary":  "stdio @playwright/mcp@latest",
+                           "registered":  true
+                       }
+                   ]
 }

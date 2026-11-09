@@ -15,3 +15,11 @@ Generated from `registry/tools.json` by `os scan`; status is as of the last scan
 | `browser` | The Claude app's built-in browser: open pages, click, fill, read console and network. Needs no install, so it backs up playwright and chrome-devtools. | Large scraping jobs; use apify or firecrawl | firecrawl for reading | built into the Claude app | /build |
 
 Sign-in, costs and approval rules for each tool are in `registry/tools.json`. Live status: `os.cmd tools`.
+
+## Connectors not yet registered
+
+These are configured on this PC but have no entry in `registry/tools.json`, so there are no rules yet for when to use them. Ask Tom before relying on one.
+
+| Connector | Configured in | What it is |
+|---|---|---|
+| `filesystem` | claude-desktop | stdio @modelcontextprotocol/server-filesystem |

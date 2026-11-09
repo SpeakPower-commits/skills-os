@@ -35,6 +35,18 @@ Run the matching verb, then report its output plainly. Explain any error and its
 
 `scan` logs it in `registry/changes.log`, and `check` warns that it is unclassified. Add it to `plugins` in `registry/routes.json`, decide any name collisions under `canonical`, then rescan.
 
+## New connector added outside the OS
+
+This covers a connector (MCP server) added through the Claude Desktop config, `claude mcp add`, or a project's `.mcp.json`.
+
+- **What scan does:** logs it in `registry/changes.log`, flags it in `check`, `tools` and the session-start message, and lists it under "Connectors not yet registered" in `TOOLS.md`. It records only the name, where it is configured, and its host or package, never keys or settings.
+- **What you do:**
+  1. Ask Tom what the connector is for, and what agents must not do with it.
+  2. Add an entry to `registry/tools.json` with `connect: "external"` and the same name. Fill in `use_for`, `not_for`, `fallback`, `auth`, `cost` and `approval`.
+  3. If a command should use it, add it to that command's `tools` in `routes.json`.
+  4. Run `scan` and `check`.
+- **Not wanted:** if Tom doesn't want agents using the connector at all, remove it from the config it came from rather than registering it.
+
 ## New agent
 
 1. Create `.claude/agents/<name>.md` with `name`, `description`, an optional `skills` list (OS skill names only) and a body that follows the existing agents.
