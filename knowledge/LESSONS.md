@@ -12,6 +12,15 @@ Entry format:
 - Applied to: skill or process updated, or "not yet"
 ```
 
+## 2026-11-09: Commit messages with double quotes fail in PowerShell 5.1
+- Venture: all
+- Lesson:
+  - Windows PowerShell 5.1 doesn't escape double quotes inside the arguments it passes to other programs.
+  - So `git commit -m` with a message containing `"..."` reaches Git in pieces, and the commit doesn't happen.
+  - When the output is hidden, nothing reports the failure: the files stay staged and `HEAD` doesn't move.
+- Evidence: On 2026-11-09, a commit whose message quoted a column name left six files staged and `HEAD` still at `b2b6311`. The same message, committed with `git commit -F <file>`, became `b122550`.
+- Applied to: the commit rule in AGENTS.md. It now says to use `git commit -F <file>` for such messages and to check `git log -1` afterwards.
+
 ## 2026-11-06: First live /inbox run: the OS boots and routes correctly
 - Venture: all
 - Lesson: In a fresh desktop session the boot chain works end to end.
