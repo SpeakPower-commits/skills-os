@@ -37,10 +37,10 @@ Who every agent works for. The facts here come from Tom's own skills and files. 
 
 - Main email: thomasotieno583@gmail.com. This is the only mailbox the Gmail connector reads.
 - Tom also uses these addresses (Tom, 2026-11-09):
-  - **t.otieno@ugandabiodiversityfund.org** (UBF). UBF colleagues usually copy his Gmail as well, so most UBF mail is in Gmail. Mail sent only to this address is not.
+  - **t.otieno@ugandabiodiversityfund.org** (UBF). UBF mail runs on Microsoft (Tom, 2026-11-09). UBF colleagues usually copy his Gmail as well, so most UBF mail is in Gmail. Mail sent only to this address is not.
   - **othomas50@outlook.com**. A separate mailbox, with no trace of it in Gmail.
   - **cuepointe@gmail.com** (CuePointe). A separate Gmail account. Tom sends to it from his main Gmail, but its own inbox isn't connected.
-- So `/inbox` covers the main Gmail only. Say so in every digest, and don't treat an empty result as covering the other three. Composio can connect Outlook and a second Gmail if Tom wants them included.
+- So `/inbox` covers the main Gmail only. Say so in every digest, and don't treat an empty result as covering the other three. If Tom wants them included, Composio's Outlook connection can cover the Outlook.com mailbox and, being Microsoft, the UBF mailbox, and a second Gmail connection can cover CuePointe. The UBF mailbox is a work account, so UBF's IT admin may have to approve the connection.
 - Correction: on 2026-11-06 Tom said all venture mail arrives in the main Gmail. On 2026-11-09 a search of the main Gmail found only 7 threads addressed to his UBF address, all of which also went to his Gmail directly, and none for the Outlook address.
 - VIPs whose mail always goes to "Needs Tom": **(Tom to fill: funders, key clients, partners)**.
 
