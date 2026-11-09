@@ -1,5 +1,5 @@
 {
-    "generated":  "2026-11-09 07:50",
+    "generated":  "2026-11-09 07:53",
     "home":  "C:\\Users\\tom.otieno\\Desktop\\OS",
     "counts":  {
                    "skills":  313,
@@ -5555,7 +5555,7 @@
                            "name":  "filesystem",
                            "source":  "claude-desktop",
                            "summary":  "stdio @modelcontextprotocol/server-filesystem",
-                           "registered":  false
+                           "registered":  true
                        },
                        {
                            "name":  "apify",

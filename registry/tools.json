@@ -113,6 +113,18 @@
       "approval": "Same rules as any browser: no purchases, posts or form submissions without Tom's OK.",
       "docs": "",
       "verified": "2026-11-06: available in the desktop app."
+    },
+    "filesystem": {
+      "use_for": "Reading and writing files in Tom's Documents folder, and only there: find, read, list, compare and draft documents. Its main use is Claude Desktop chat, which has no file tools of its own.",
+      "not_for": "Files outside Documents, which it can't reach. Inside Claude Code, use your own file tools instead",
+      "fallback": "Claude Code's own file tools, or ask Tom to attach the file",
+      "connect": "external",
+      "auth": "None. It runs locally from the Claude Desktop config on Tom's own Node.js in Documents\\nodejs, so keep that folder. It can reach only the Documents folder, and it has no delete tool.",
+      "requires": [],
+      "cost": "Free.",
+      "approval": "Reading is fine. Writing, editing, moving, copying over or overwriting any file needs Tom's explicit OK first.",
+      "docs": "https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem",
+      "verified": "2026-11-09: found by os scan in claude_desktop_config.json, added 2026-11-06. Its tools load in Claude Code sessions. Tom registered it on 2026-11-09."
     }
   }
 }

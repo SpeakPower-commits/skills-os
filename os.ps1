@@ -658,17 +658,17 @@ function Write-ToolsDoc($Routes) {
   [void]$b.AppendLine()
   [void]$b.AppendLine('Generated from `registry/tools.json` by `os scan`; status is as of the last scan. Before relying on a tool, confirm its tools are loaded in your session. If they are not, say so and use the fallback.')
   [void]$b.AppendLine()
-  [void]$b.AppendLine('| Tool | Use it for | Not for | If unavailable | Status | Used by |')
-  [void]$b.AppendLine('|---|---|---|---|---|---|')
+  [void]$b.AppendLine('| Tool | Use it for | Not for | If unavailable | Approval rule | Status | Used by |')
+  [void]$b.AppendLine('|---|---|---|---|---|---|---|')
   foreach ($prop in $tools.tools.PSObject.Properties) {
     $t = $prop.Value
     $state = Get-ToolState $prop.Name $t $userMcp
     $users = ''
     if ($usedBy.ContainsKey($prop.Name)) { $users = (@($usedBy[$prop.Name]) -join ', ') }
-    [void]$b.AppendLine("| ``$($prop.Name)`` | $(ConvertTo-Cell ([string]$t.use_for) 150) | $(ConvertTo-Cell ([string]$t.not_for) 90) | $(ConvertTo-Cell ([string]$t.fallback) 70) | $($state.text) | $users |")
+    [void]$b.AppendLine("| ``$($prop.Name)`` | $(ConvertTo-Cell ([string]$t.use_for) 150) | $(ConvertTo-Cell ([string]$t.not_for) 110) | $(ConvertTo-Cell ([string]$t.fallback) 70) | $(ConvertTo-Cell ([string]$t.approval) 120) | $($state.text) | $users |")
   }
   [void]$b.AppendLine()
-  [void]$b.AppendLine('Sign-in, costs and approval rules for each tool are in `registry/tools.json`. Live status: `os.cmd tools`.')
+  [void]$b.AppendLine('Follow each tool''s approval rule as well as the general rules in AGENTS.md. Sign-in and cost details are in `registry/tools.json`. Live status: `os.cmd tools`.')
   $loose = @(Get-UnregisteredMcp)
   if ($loose.Count -gt 0) {
     [void]$b.AppendLine()

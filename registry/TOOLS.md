@@ -2,24 +2,17 @@
 
 Generated from `registry/tools.json` by `os scan`; status is as of the last scan. Before relying on a tool, confirm its tools are loaded in your session. If they are not, say so and use the fallback.
 
-| Tool | Use it for | Not for | If unavailable | Status | Used by |
-|---|---|---|---|---|---|
-| `apify` | Scraping at scale: thousands of ready-made scrapers (Actors) for Google Maps, social media, e-commerce, search results and directories. Lead lists... | One page or one small site; use firecrawl | firecrawl, or composio's web tools | set up; sign in on first use | /research, /analyze, /measure |
-| `firecrawl` | Turning websites into clean markdown or structured JSON: scrape a page, map or crawl a site, search the web and read the results, extract fields. | Platforms that need a logged-in browser; use playwright. Bulk platform scraping; use apify | the built-in browser for single pages | set up; sign in on first use | /think, /research, /audit, /decide |
-| `composio` | Acting in 250+ apps: Gmail, Outlook, Calendar, Sheets, Drive, Notion, Slack, HubSpot, LinkedIn, Instagram and more. Always search its tools first... | Apps that have their own connector here (Gmail, Canva); prefer those | the app's own connector, or ask Tom to paste the data | claude.ai connector | /research, /analyze, /campaign, /measure, /inbox |
-| `chrome-devtools` | Diagnosing a web page in real Chrome: console errors, network requests, performance traces, screenshots. Use it to find why a site is slow or broken. | Long scripted flows across many pages; use playwright | the built-in browser (console and network reading) | set up; no sign-in needed | /build, /audit |
-| `playwright` | Driving a browser step by step: multi-page flows, form filling, testing a web app end to end, capturing pages that need clicks or scrolling. | Reading a public page; use firecrawl. Diagnosing performance; use chrome-devtools | the built-in browser | set up; no sign-in needed | /build, /audit |
-| `higgsfield` | Generating images and short videos for campaigns, ads, social posts and video scenes. | Layouts with text, brand templates or carousels; use canva | canva, or a written brief for a designer | set up; sign in on first use | /campaign |
-| `gmail` | Reading, searching, labelling and drafting in Tom's Gmail. The first choice for /inbox. | Other mailboxes; use composio (Outlook) or pasted text | composio Gmail, or pasted email text | claude.ai connector | /inbox |
-| `canva` | Designs with layout and text: social graphics, carousels, posters, one-pagers, decks, brand templates. | Photoreal images or video generation; use higgsfield | a written design brief | claude.ai connector | /campaign |
-| `browser` | The Claude app's built-in browser: open pages, click, fill, read console and network. Needs no install, so it backs up playwright and chrome-devtools. | Large scraping jobs; use apify or firecrawl | firecrawl for reading | built into the Claude app | /build |
+| Tool | Use it for | Not for | If unavailable | Approval rule | Status | Used by |
+|---|---|---|---|---|---|---|
+| `apify` | Scraping at scale: thousands of ready-made scrapers (Actors) for Google Maps, social media, e-commerce, search results and directories. Lead lists... | One page or one small site; use firecrawl | firecrawl, or composio's web tools | Ask Tom before a run likely to exceed the free tier. | set up; sign in on first use | /research, /analyze, /measure |
+| `firecrawl` | Turning websites into clean markdown or structured JSON: scrape a page, map or crawl a site, search the web and read the results, extract fields. | Platforms that need a logged-in browser; use playwright. Bulk platform scraping; use apify | the built-in browser for single pages | Ask Tom before crawling more than about 100 pages. | set up; sign in on first use | /think, /research, /audit, /decide |
+| `composio` | Acting in 250+ apps: Gmail, Outlook, Calendar, Sheets, Drive, Notion, Slack, HubSpot, LinkedIn, Instagram and more. Always search its tools first... | Apps that have their own connector here (Gmail, Canva); prefer those | the app's own connector, or ask Tom to paste the data | Reading is fine. Sending, posting, creating or deleting anything in an app needs Tom's explicit OK. | claude.ai connector | /research, /analyze, /campaign, /measure, /inbox |
+| `chrome-devtools` | Diagnosing a web page in real Chrome: console errors, network requests, performance traces, screenshots. Use it to find why a site is slow or broken. | Long scripted flows across many pages; use playwright | the built-in browser (console and network reading) | Do not log in to Tom's accounts or submit forms without his OK. | set up; no sign-in needed | /build, /audit |
+| `playwright` | Driving a browser step by step: multi-page flows, form filling, testing a web app end to end, capturing pages that need clicks or scrolling. | Reading a public page; use firecrawl. Diagnosing performance; use chrome-devtools | the built-in browser | Do not log in, buy, submit or post without Tom's OK. | set up; no sign-in needed | /build, /audit |
+| `higgsfield` | Generating images and short videos for campaigns, ads, social posts and video scenes. | Layouts with text, brand templates or carousels; use canva | canva, or a written brief for a designer | Confirm the brief with Tom before a video generation or any batch. | set up; sign in on first use | /campaign |
+| `gmail` | Reading, searching, labelling and drafting in Tom's Gmail. The first choice for /inbox. | Other mailboxes; use composio (Outlook) or pasted text | composio Gmail, or pasted email text | Drafting is fine. Sending, archiving, labelling or deleting needs Tom's explicit OK. | claude.ai connector | /inbox |
+| `canva` | Designs with layout and text: social graphics, carousels, posters, one-pagers, decks, brand templates. | Photoreal images or video generation; use higgsfield | a written design brief | Publishing or sharing a design needs Tom's OK. | claude.ai connector | /campaign |
+| `browser` | The Claude app's built-in browser: open pages, click, fill, read console and network. Needs no install, so it backs up playwright and chrome-devtools. | Large scraping jobs; use apify or firecrawl | firecrawl for reading | Same rules as any browser: no purchases, posts or form submissions without Tom's OK. | built into the Claude app | /build |
+| `filesystem` | Reading and writing files in Tom's Documents folder, and only there: find, read, list, compare and draft documents. Its main use is Claude Desktop... | Files outside Documents, which it can't reach. Inside Claude Code, use your own file tools instead | Claude Code's own file tools, or ask Tom to attach the file | Reading is fine. Writing, editing, moving, copying over or overwriting any file needs Tom's explicit OK first. | configured outside the OS (claude-desktop) |  |
 
-Sign-in, costs and approval rules for each tool are in `registry/tools.json`. Live status: `os.cmd tools`.
-
-## Connectors not yet registered
-
-These are configured on this PC but have no entry in `registry/tools.json`, so there are no rules yet for when to use them. Ask Tom before relying on one.
-
-| Connector | Configured in | What it is |
-|---|---|---|
-| `filesystem` | claude-desktop | stdio @modelcontextprotocol/server-filesystem |
+Follow each tool's approval rule as well as the general rules in AGENTS.md. Sign-in and cost details are in `registry/tools.json`. Live status: `os.cmd tools`.

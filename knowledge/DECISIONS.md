@@ -13,6 +13,16 @@ Entry format:
 - Revisit if: what would reopen it
 ```
 
+## 2026-11-09: Let agents use the Documents filesystem connector
+- Venture: all
+- Decision: Register the `filesystem` connector from the Claude Desktop config in `registry/tools.json` as an `external` tool.
+  - Agents may read files in the Documents folder freely.
+  - Any write, edit, move or overwrite there needs Tom's explicit OK first.
+  - Inside Claude Code, agents prefer their own file tools.
+- Over: Leaving it flagged as unregistered, or removing it from the Claude Desktop config.
+- Why: Tom's own call on 2026-11-09, after `os scan` flagged it as the only connector the OS didn't know about.
+- Revisit if: Tom wants agents kept out of Documents, or the connector is pointed at other folders.
+
 ## 2026-11-06: Back up the Skills OS to a private GitHub repo
 - Venture: all
 - Decision: Keep `Desktop\OS` under Git and push it to the private repo `github.com/SpeakPower-commits/skills-os`, on Tom's personal account (formerly `cuepointe`). Commits use a repo-local identity: Tom Otieno with his Gmail. `.gitignore` keeps out machine-local state: `.claude/settings.local.json`, `registry/.fingerprint`, `registry/installed.json` and session worktrees. The generated registry files stay in, for their history.
