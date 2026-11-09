@@ -1,5 +1,5 @@
 {
-    "generated":  "2026-11-09 07:53",
+    "generated":  "2026-11-09 08:39",
     "home":  "C:\\Users\\tom.otieno\\Desktop\\OS",
     "counts":  {
                    "skills":  313,
@@ -8,7 +8,7 @@
                    "owned":  6,
                    "agents":  18,
                    "plugins":  22,
-                   "connectorsPending":  58
+                   "connectorsPending":  0
                },
     "plugins":  [
                     {
@@ -41,8 +41,7 @@
                         "agents":  5,
                         "domain":  "comms",
                         "connectorsPending":  [
-                                                  "gong",
-                                                  "figma"
+
                                               ]
                     },
                     {
@@ -53,8 +52,7 @@
                         "agents":  0,
                         "domain":  "operations",
                         "connectorsPending":  [
-                                                  "intercom",
-                                                  "guru"
+
                                               ]
                     },
                     {
@@ -65,7 +63,7 @@
                         "agents":  0,
                         "domain":  "data",
                         "connectorsPending":  [
-                                                  "hex"
+
                                               ]
                     },
                     {
@@ -87,7 +85,7 @@
                         "agents":  0,
                         "domain":  "engineering",
                         "connectorsPending":  [
-                                                  "datadog"
+
                                               ]
                     },
                     {
@@ -109,7 +107,7 @@
                         "agents":  0,
                         "domain":  "research",
                         "connectorsPending":  [
-                                                  "exa"
+
                                               ]
                     },
                     {
@@ -131,10 +129,7 @@
                         "agents":  0,
                         "domain":  "comms",
                         "connectorsPending":  [
-                                                  "ahrefs",
-                                                  "supermetrics",
-                                                  "similarweb",
-                                                  "klaviyo"
+
                                               ]
                     },
                     {
@@ -167,7 +162,7 @@
                         "agents":  0,
                         "domain":  "documents",
                         "connectorsPending":  [
-                                                  "pdf"
+
                                               ]
                     },
                     {
@@ -189,12 +184,7 @@
                         "agents":  0,
                         "domain":  "knowledge",
                         "connectorsPending":  [
-                                                  "linear",
-                                                  "notion",
-                                                  "clickup",
-                                                  "slack",
-                                                  "atlassian",
-                                                  "monday"
+
                                               ]
                     },
                     {
@@ -205,11 +195,7 @@
                         "agents":  0,
                         "domain":  "strategy",
                         "connectorsPending":  [
-                                                  "amplitude-eu",
-                                                  "pendo",
-                                                  "fireflies",
-                                                  "amplitude",
-                                                  "similarweb"
+
                                               ]
                     },
                     {
@@ -220,15 +206,7 @@
                         "agents":  0,
                         "domain":  "sales",
                         "connectorsPending":  [
-                                                  "zoominfo",
-                                                  "salesforce",
-                                                  "outreach",
-                                                  "close",
-                                                  "microsoft-365",
-                                                  "calendly",
-                                                  "lusha",
-                                                  "otter-ai",
-                                                  "crunchbase"
+
                                               ]
                     },
                     {
@@ -250,30 +228,7 @@
                         "agents":  0,
                         "domain":  "operations",
                         "connectorsPending":  [
-                                                  "canva",
-                                                  "docusign",
-                                                  "intuit-mailchimp",
-                                                  "intuit-quickbooks",
-                                                  "emergent",
-                                                  "expensify",
-                                                  "clay",
-                                                  "paypal",
-                                                  "airwallex-agentos",
-                                                  "apollo-io",
-                                                  "ramp",
-                                                  "wix",
-                                                  "ringex-chat",
-                                                  "zapier",
-                                                  "square",
-                                                  "zoho-books",
-                                                  "stripe",
-                                                  "zoho-crm",
-                                                  "zoho-projects",
-                                                  "myob",
-                                                  "trello",
-                                                  "zoho-desk",
-                                                  "tiktok",
-                                                  "gusto"
+
                                               ]
                     },
                     {

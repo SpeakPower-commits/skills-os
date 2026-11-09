@@ -12,6 +12,16 @@ Entry format:
 - Applied to: skill or process updated, or "not yet"
 ```
 
+## 2026-11-09: Ignore the small-business plugin's Gmail sign-in
+- Venture: all
+- Lesson:
+  - Two Gmail connections load in sessions. The claude.ai Gmail connector works, and `/inbox` uses it.
+  - The small-business plugin's own Gmail server can't be signed into from Claude Code, because Google's Gmail sign-in service doesn't accept clients registered on the fly.
+  - Trying to sign in shows "server config doesn't match the plugin". A direct call fails with "Incompatible auth server: does not support dynamic client registration".
+  - Both connections reach the same Gmail, so nothing is lost. Ignore that sign-in prompt.
+- Evidence: On 2026-11-09, Tom's sign-in attempt failed. In the same session, the claude.ai connector's `list_labels` returned his labels, while the plugin's `list_labels` returned the error above.
+- Applied to: the `auth` note of the `gmail` entry in `registry/tools.json`.
+
 ## 2026-11-09: Commit messages with double quotes fail in PowerShell 5.1
 - Venture: all
 - Lesson:
