@@ -12,6 +12,15 @@ Entry format:
 - Applied to: skill or process updated, or "not yet"
 ```
 
+## 2026-11-09: os status can't see which connectors need a sign-in
+- Venture: all
+- Lesson:
+  - `os status` counted connectors "waiting for sign-in" from the app's `mcp-needs-auth-cache.json`. That file lists only some of them, and the count was frozen at the last scan.
+  - So the status said 0 while Higgsfield still needed a sign-in.
+  - Only a session knows: it flags each connector that still needs one, and `/mcp` signs in.
+- Evidence: On 2026-11-09 the cache held 3 plugin entries (Mailchimp, QuickBooks, Exa), written at 11:22, after the 08:39 scan the count came from. In the same session, the app flagged Higgsfield and dozens of plugin connectors as needing sign-in.
+- Applied to: `os.ps1`, with Tom's OK on 2026-11-09. `os status` now says it can't see sign-ins and points to `/mcp`. The count, and the SKILLS.md plugin column built from the same file, are gone.
+
 ## 2026-11-09: Ignore the small-business plugin's Gmail sign-in
 - Venture: all
 - Lesson:

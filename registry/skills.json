@@ -1,5 +1,5 @@
 {
-    "generated":  "2026-11-09 08:39",
+    "generated":  "2026-11-09 11:39",
     "home":  "C:\\Users\\tom.otieno\\Desktop\\OS",
     "counts":  {
                    "skills":  313,
@@ -7,8 +7,7 @@
                    "commands":  12,
                    "owned":  6,
                    "agents":  18,
-                   "plugins":  22,
-                   "connectorsPending":  0
+                   "plugins":  22
                },
     "plugins":  [
                     {
@@ -17,10 +16,7 @@
                         "skills":  3,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "sales",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "sales"
                     },
                     {
                         "name":  "auth0",
@@ -28,10 +24,7 @@
                         "skills":  1,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "engineering",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "engineering"
                     },
                     {
                         "name":  "brand-voice",
@@ -39,10 +32,7 @@
                         "skills":  5,
                         "references":  0,
                         "agents":  5,
-                        "domain":  "comms",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "comms"
                     },
                     {
                         "name":  "customer-support",
@@ -50,10 +40,7 @@
                         "skills":  5,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "operations",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "operations"
                     },
                     {
                         "name":  "data",
@@ -61,10 +48,7 @@
                         "skills":  10,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "data",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "data"
                     },
                     {
                         "name":  "design",
@@ -72,10 +56,7 @@
                         "skills":  7,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "design",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "design"
                     },
                     {
                         "name":  "engineering",
@@ -83,10 +64,7 @@
                         "skills":  10,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "engineering",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "engineering"
                     },
                     {
                         "name":  "enterprise-search",
@@ -94,10 +72,7 @@
                         "skills":  5,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "research",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "research"
                     },
                     {
                         "name":  "exa",
@@ -105,10 +80,7 @@
                         "skills":  2,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "research",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "research"
                     },
                     {
                         "name":  "hubspot-sales",
@@ -116,10 +88,7 @@
                         "skills":  9,
                         "references":  0,
                         "agents":  2,
-                        "domain":  "sales",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "sales"
                     },
                     {
                         "name":  "marketing",
@@ -127,10 +96,7 @@
                         "skills":  8,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "comms",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "comms"
                     },
                     {
                         "name":  "noibu",
@@ -138,10 +104,7 @@
                         "skills":  8,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "data",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "data"
                     },
                     {
                         "name":  "operations",
@@ -149,10 +112,7 @@
                         "skills":  9,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "operations",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "operations"
                     },
                     {
                         "name":  "pdf-viewer",
@@ -160,10 +120,7 @@
                         "skills":  5,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "documents",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "documents"
                     },
                     {
                         "name":  "postiz",
@@ -171,10 +128,7 @@
                         "skills":  1,
                         "references":  1,
                         "agents":  0,
-                        "domain":  "comms",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "comms"
                     },
                     {
                         "name":  "productivity",
@@ -182,10 +136,7 @@
                         "skills":  4,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "knowledge",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "knowledge"
                     },
                     {
                         "name":  "product-management",
@@ -193,10 +144,7 @@
                         "skills":  9,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "strategy",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "strategy"
                     },
                     {
                         "name":  "sales",
@@ -204,10 +152,7 @@
                         "skills":  36,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "sales",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "sales"
                     },
                     {
                         "name":  "searchfit-seo",
@@ -215,10 +160,7 @@
                         "skills":  17,
                         "references":  0,
                         "agents":  3,
-                        "domain":  "comms",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "comms"
                     },
                     {
                         "name":  "small-business",
@@ -226,10 +168,7 @@
                         "skills":  44,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "operations",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "operations"
                     },
                     {
                         "name":  "twilio-developer-kit",
@@ -237,10 +176,7 @@
                         "skills":  57,
                         "references":  0,
                         "agents":  0,
-                        "domain":  "engineering",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "engineering"
                     },
                     {
                         "name":  "zoom-plugin",
@@ -248,10 +184,7 @@
                         "skills":  30,
                         "references":  27,
                         "agents":  0,
-                        "domain":  "engineering",
-                        "connectorsPending":  [
-
-                                              ]
+                        "domain":  "engineering"
                     }
                 ],
     "skills":  [

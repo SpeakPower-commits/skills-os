@@ -30,7 +30,6 @@ $P = @{
   UserConfig = Join-Path $env:USERPROFILE '.claude.json'
   UserSkills = Join-Path $env:USERPROFILE '.claude\skills'
   UserAgents = Join-Path $env:USERPROFILE '.claude\agents'
-  AuthCache  = Join-Path $env:USERPROFILE '.claude\mcp-needs-auth-cache.json'
 }
 # Frontmatter keys accepted outside Claude Code (claude.ai uploads reject anything else).
 $PortableKeys = @('name', 'description', 'license', 'compatibility', 'metadata', 'allowed-tools')
@@ -225,21 +224,9 @@ function Build-Catalog {
   $agents = New-Object System.Collections.ArrayList
   $plugins = New-Object System.Collections.ArrayList
 
-  # Connectors still waiting for sign-in, keyed by plugin.
-  $pending = @{}
-  $pendingTotal = 0
-  if (Test-Path $P.AuthCache) {
-    try {
-      $auth = Read-Text $P.AuthCache | ConvertFrom-Json
-      foreach ($k in @($auth.PSObject.Properties.Name)) {
-        $pendingTotal++
-        if ($k -match '^plugin:([^:]+):(.+)$') {
-          if (-not $pending.ContainsKey($Matches[1])) { $pending[$Matches[1]] = New-Object System.Collections.ArrayList }
-          [void]$pending[$Matches[1]].Add($Matches[2])
-        }
-      }
-    } catch { }
-  }
+  # Sign-in state is not tracked. The app's mcp-needs-auth-cache.json lists only some of the
+  # servers that need a sign-in: on 2026-11-09 it held 3 while a session flagged Higgsfield and
+  # dozens of plugin connectors. A count built from it reported 0 when Higgsfield needed one.
 
   # Installed plugins.
   foreach ($dir in @(Get-PluginDirs)) {
@@ -292,11 +279,9 @@ function Build-Catalog {
         $agentCount++
       }
     }
-    $wait = @()
-    if ($pending.ContainsKey($pname)) { $wait = @($pending[$pname]) }
     [void]$plugins.Add([pscustomobject]@{
         name = $pname; version = $pver; skills = $direct; references = $refs; agents = $agentCount
-        domain = (Get-Classification $routes '' $pname @{}).domain; connectorsPending = $wait
+        domain = (Get-Classification $routes '' $pname @{}).domain
       })
   }
 
@@ -384,7 +369,6 @@ function Build-Catalog {
       owned = @($sorted | Where-Object { $_.origin -eq 'owned' }).Count
       agents = @($agents).Count
       plugins = @($plugins).Count
-      connectorsPending = $pendingTotal
     }
     plugins = @($plugins | Sort-Object name)
     skills = $sorted
@@ -443,11 +427,10 @@ function Write-SkillsDoc($Cat) {
   [void]$b.AppendLine()
   [void]$b.AppendLine('## Plugins')
   [void]$b.AppendLine()
-  [void]$b.AppendLine('| Plugin | Version | Domain | Skills | Reference docs | Agents | Connectors waiting for sign-in |')
-  [void]$b.AppendLine('|---|---|---|---|---|---|---|')
+  [void]$b.AppendLine('| Plugin | Version | Domain | Skills | Reference docs | Agents |')
+  [void]$b.AppendLine('|---|---|---|---|---|---|')
   foreach ($p2 in @($Cat.plugins)) {
-    $wait = @($p2.connectorsPending).Count
-    [void]$b.AppendLine("| $($p2.name) | $($p2.version) | $($p2.domain) | $($p2.skills) | $($p2.references) | $($p2.agents) | $wait |")
+    [void]$b.AppendLine("| $($p2.name) | $($p2.version) | $($p2.domain) | $($p2.skills) | $($p2.references) | $($p2.agents) |")
   }
   Write-Text $P.SkillsMd $b.ToString()
 }
@@ -1066,7 +1049,7 @@ function Invoke-Status {
   Write-Output "Your skills $($cat.counts.owned) live, $lab in the lab"
   Write-Output "Your agents $osAgents (plus $($cat.counts.agents - $osAgents) from plugins)"
   Write-Output "Catalog     $($cat.counts.skills) callable skills, $($cat.counts.references) reference docs, $($cat.counts.plugins) plugins"
-  Write-Output "Connectors  $($cat.counts.connectorsPending) waiting for sign-in"
+  Write-Output "Sign-ins    not visible to this tool; each session flags connectors that still need one (sign in via /mcp)"
   $toolsJson = Get-Tools
   if ($toolsJson) {
     $toolTotal = @($toolsJson.tools.PSObject.Properties).Count
