@@ -10,7 +10,7 @@ OS home: `C:\Users\tom.otieno\Desktop\OS`. Outside that folder, read `AGENTS.md`
 
 Request: $ARGUMENTS
 
-Skills: the `/audit` row of `registry/ROUTES.md`. Match the lens to the skill: code and security, SEO and AI visibility, brand and comms, operations and compliance, contracts, or accessibility. For a large audit, hand it to the `auditor` agent.
+Skills: the `/audit` row of `registry/ROUTES.md`. Match the lens to the skill: code and security, outdated front-end patterns (`modern-web-guidance`, its legacy scan), SEO and AI visibility, brand and comms, operations and compliance, contracts, or accessibility. For a large audit, hand it to the `auditor` agent.
 
 ## Method
 

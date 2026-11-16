@@ -10,7 +10,7 @@ OS home: `C:\Users\tom.otieno\Desktop\OS`. Outside that folder, read `AGENTS.md`
 
 Request: $ARGUMENTS
 
-Skills: always load `serverless-engineering-standards` first. Then use the rest of the `/build` row of `registry/ROUTES.md`. For a large build, hand it to the `engineer` agent.
+Skills: always load `serverless-engineering-standards` first. For any change to HTML, CSS or client-side JavaScript, load `modern-web-guidance` next, before writing code. Then use the rest of the `/build` row of `registry/ROUTES.md`. For a large build, hand it to the `engineer` agent.
 
 ## Method
 
