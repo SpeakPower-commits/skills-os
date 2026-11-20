@@ -17,6 +17,7 @@ Draft, never live. For SpeakPower's LinkedIn (as an article) and blog. About 1,0
 | `i-audited-my-own-linkedin.pdf` | The same document exported to PDF by Microsoft Word. |
 | `images/05-cover-photo.jpg` | Human image: banner cropped from `SpeakPower\Graphics & Ads\SpeakPower Ads\SP Ad image.jpg`. |
 | `images/06-author-tom.png` | Human image: circular crop of Tom's own photo, `SpeakPower Ads\20250313_152357.jpg`. |
+| `linkedin-upload/` | For publishing on LinkedIn: plain-text article with image markers, plain-text feed post, and the images resized and numbered, kept separate because pasting rich text failed. Start with `0-HOW-TO-PUBLISH.txt`. Rebuild: `src/build-linkedin.ps1`. |
 | `src/` | Editable HTML for each graphic and `render.ps1`, which rebuilds the PNGs with headless Edge. Also `prep-photos.ps1` (crops the two photos), `build-docx.js` (Word file), `export-pdf.ps1` (PDF). |
 
 ### Rebuilding the Word and PDF files
