@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Six checks</title>
+<style>
+:root{--navy:#0D172A;--navy2:#16284A;--navy3:#22396A;--gold:#F2B720;--cream:#FBF6EA;--mist:#C9D1E2;--muted:#9FB0D0}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1200px;height:1200px;overflow:hidden;background:var(--navy)}
+body{position:relative;font-family:Bahnschrift,'Segoe UI',Arial,sans-serif;color:#fff}
+.glow{position:absolute;inset:0;background:radial-gradient(circle at 88% 6%, rgba(43,74,134,.75), rgba(13,23,42,0) 55%)}
+.head{position:absolute;left:60px;top:64px;right:60px}
+.eyebrow{font-size:16px;letter-spacing:.24em;font-weight:600;color:var(--gold);text-transform:uppercase}
+h1{margin-top:16px;font-size:56px;line-height:1.05;font-weight:700;letter-spacing:-.005em;max-width:1000px;text-wrap:balance}
+.sub{margin-top:16px;font-size:22px;color:var(--mist)}
+.grid{position:absolute;left:60px;top:292px;width:1080px;display:grid;grid-template-columns:repeat(3,344px);grid-auto-rows:352px;gap:24px}
+.card{position:relative;background:var(--navy2);border:1.5px solid #2A4276;border-radius:18px;padding:28px 28px 24px}
+.num{width:48px;height:48px;border-radius:50%;background:rgba(242,183,32,.14);border:2px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:700}
+.card h2{margin-top:22px;font-size:29px;line-height:1.08;font-weight:700;min-height:63px;text-wrap:balance}
+.card p{margin-top:14px;font-size:19px;line-height:1.42;color:var(--mist)}
+.score{position:absolute;left:28px;bottom:22px;display:flex;align-items:center;gap:6px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.pip{width:20px;height:6px;border-radius:3px;background:#34508C}
+.hot{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.hot .num{background:var(--navy);border-color:var(--navy);color:var(--gold)}
+.hot p{color:#2A2410}
+.hot .score{color:#3A2E05}
+.hot .pip{background:#0D172A}
+.tag{position:absolute;right:20px;top:20px;background:var(--navy);color:var(--gold);font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:7px 12px;border-radius:999px}
+.foot{position:absolute;left:60px;right:60px;bottom:48px;display:flex;justify-content:space-between;align-items:center}
+.foot .line{font-size:20px;color:var(--mist)}
+.logo{display:flex;align-items:center;gap:12px;font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.logo img{width:54px;height:54px;border-radius:12px}
+</style></head><body>
+<div class="glow"></div>
+<div class="head">
+  <div class="eyebrow">The method</div>
+  <h1>The six checks of a communications audit</h1>
+  <p class="sub">Each scored 0 to 4. Each backed by evidence you can point at.</p>
+</div>
+
+<div class="grid">
+  <div class="card"><div class="num">1</div><h2>Positioning clarity</h2><p>Can a stranger say who you serve, what you do and why you're different, in five seconds?</p><div class="score">Score <i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i> 0-4</div></div>
+  <div class="card"><div class="num">2</div><h2>Message consistency</h2><p>Do your website, LinkedIn and deck make the same promise, in the same words?</p><div class="score">Score <i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i> 0-4</div></div>
+  <div class="card hot"><span class="tag">Where mine failed</span><div class="num">3</div><h2>Audience fit</h2><p>Are you speaking to the people you say you want, and do the people who respond look like them?</p><div class="score">Score <i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i> 0-4</div></div>
+  <div class="card"><div class="num">4</div><h2>Channel and format fit</h2><p>Are you where your audience is, in a form that opens on a phone with patchy data?</p><div class="score">Score <i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i> 0-4</div></div>
+  <div class="card"><div class="num">5</div><h2>Proof and credibility</h2><p>Named results, real numbers, testimonials. For NGOs: registration, reports, open finances.</p><div class="score">Score <i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i> 0-4</div></div>
+  <div class="card"><div class="num">6</div><h2>Measurement and ownership</h2><p>Does someone own the goal? Is there one number you check every month?</p><div class="score">Score <i class="pip"></i><i class="pip"></i><i class="pip"></i><i class="pip"></i> 0-4</div></div>
+</div>
+
+<div class="foot">
+  <div class="line">Most organisations fail one loudly. The other five lean on it.</div>
+  <div class="logo"><img src="assets/speakpower-logo.png" alt="SpeakPower"><span>SpeakPower</span></div>
+</div>
+</body></html>
