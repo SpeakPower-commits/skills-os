@@ -1,0 +1,44 @@
+PUBLISHING ON LINKEDIN: text and images are separate on purpose
+=================================================================
+
+Pasting from Word, a PDF or a web page carries hidden formatting and embedded
+images, which is the likely reason your paste kept failing. Here the words are
+plain text, and every image is its own small file you add by hand.
+
+Files
+  1-article-text.txt      the article, plain text, no images inside
+  2-feed-post.txt         the short teaser post for your feed
+  images\                 1-cover.png, 2-audience-chart.png, 3-six-checks.png,
+                          4-thirty-minute-checklist.png
+                          (extra-cover-photo.jpg and extra-author-photo.png are optional)
+
+Steps for the article
+  1. Open a new LinkedIn article (Write article).
+  2. Upload images\1-cover.png as the cover image.
+  3. Open 1-article-text.txt in Notepad, press Ctrl+A, Ctrl+C.
+  4. Click into the article body and paste with Ctrl+Shift+V (paste as plain text).
+     Paste the title line into the title box. If the paste still fails, paste one
+     section at a time.
+  5. Delete the [COVER IMAGE ...] line.
+  6. Find each [INSERT IMAGE ...] line. Delete it, then add that image with the
+     editor's image button, in this order:
+       2-audience-chart.png          after "And founders are exactly who I say I'm speaking to."
+       3-six-checks.png              after the six numbered checks
+       4-thirty-minute-checklist.png after "The one number (5 minutes)."
+  7. Select each of these lines and give it the Heading style:
+       The message was fine. The match was wrong.
+       But isn't a wider audience better?
+       What a communications audit actually checks
+       Why this hits NGOs and young companies harder
+       Run a mini-audit in 30 minutes
+       What I'm doing about it
+  8. Optional: bold the six numbered check names and the four step names.
+  9. Preview, then publish when you are happy.
+
+Then the feed post
+  1. Start a new post, paste 2-feed-post.txt as plain text.
+  2. Replace [article link] with the link to the published article.
+  3. Attach images\2-audience-chart.png.
+
+Before you publish, check the numbers (715 followers, 29% entry-level, 6% founders)
+against your LinkedIn analytics. See ..\README.md.
