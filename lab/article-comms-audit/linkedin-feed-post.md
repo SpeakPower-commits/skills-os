@@ -8,7 +8,7 @@ I sell communications audits.
 
 So in September, I pointed one at myself.
 
-702 followers.
+715 followers.
 
 Entry-level professionals: 29% of my audience.
 Founders: 6%.

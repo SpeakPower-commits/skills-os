@@ -23,7 +23,7 @@ So in September, I pointed one at myself.
 
 I've told clients for years that you can't fix what you haven't measured. Turns out that applies to the person doing the telling.
 
-SpeakPower's LinkedIn page had 702 followers. I was posting on a seven-days-a-week calendar. The posts were decent.
+SpeakPower's LinkedIn page had 715 followers. I was posting on a seven-days-a-week calendar. The posts were decent.
 
 Then I opened the audience analytics.
 
