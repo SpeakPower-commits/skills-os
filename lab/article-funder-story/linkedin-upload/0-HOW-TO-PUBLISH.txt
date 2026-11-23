@@ -1,0 +1,40 @@
+PUBLISHING ON LINKEDIN: text and images are separate on purpose
+=================================================================
+
+Files
+  1-article-text.txt      the article, plain text, no images inside
+  2-feed-post.txt         the short teaser post for your feed
+  images\                 1-cover.png, 2-two-studies.png, 3-five-parts.png, 4-before-after.png
+                          (extra-cover-photo.jpg and extra-author-photo.png are optional)
+
+Steps for the article
+  1. Open a new LinkedIn article (Write article).
+  2. Upload images\1-cover.png as the cover image.
+  3. Open 1-article-text.txt in Notepad, press Ctrl+A, Ctrl+C.
+  4. Click into the article body and paste with Ctrl+Shift+V (paste as plain text).
+     The first line is the title. If the paste still fails, paste one section at a time.
+  5. Delete the [COVER IMAGE ...] line.
+  6. Find each [INSERT IMAGE ...] line. Delete it, then add that image with the
+     editor's image button, in this order:
+       2-two-studies.png    after "People didn't give more to the one child..."
+       3-five-parts.png     after "5. The ask."
+       4-before-after.png   after "Short. Specific. Add one number and one ask..."
+  7. Select each of these lines and give it the Heading style:
+       Where the advice comes from
+       Then somebody checked
+       So what do I tell NGOs now?
+       Three fixes I'd make first
+       The one-page funder story
+       Before and after
+       Test it in ten minutes
+       Your Monday task
+       Why I'm telling you this
+  8. Optional: bold the numbered parts (1. Who. to 5. The ask.) and the three fixes.
+  9. Preview, then publish when you are happy.
+
+Then the feed post
+  1. Start a new post, paste 2-feed-post.txt as plain text.
+  2. Replace [article link] with the link to the published article.
+  3. Attach images\2-two-studies.png.
+
+Before you publish, read ..\README.md for the claims to confirm.
