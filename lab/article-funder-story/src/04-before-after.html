@@ -1,45 +1,41 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><title>Before and after</title>
 <style>
-:root{--navy:#0D172A;--navy2:#16284A;--gold:#F2B720;--cream:#FBF6EA;--slate:#3B4558;--muted:#6B7488}
+:root{--navy:#0D172A;--gold:#F2B720;--paper:#F6EEDB;--red:#D64045}
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{width:1080px;height:1350px;overflow:hidden;background:var(--cream)}
-body{position:relative;font-family:Bahnschrift,'Segoe UI',Arial,sans-serif;color:var(--navy)}
-.band{position:absolute;left:0;top:0;right:0;height:10px;background:var(--gold)}
-.head{position:absolute;left:72px;top:68px;right:72px}
-.eyebrow{font-size:16px;letter-spacing:.24em;font-weight:600;color:var(--muted);text-transform:uppercase}
-h1{margin-top:16px;font-size:64px;line-height:1.04;font-weight:700;letter-spacing:-.01em;text-wrap:balance}
-h1 em{font-style:normal;background:linear-gradient(transparent 62%, rgba(242,183,32,.55) 62%)}
-.box{position:absolute;left:72px;right:72px;border-radius:20px;padding:34px 40px}
-.before{top:304px;background:#E7E3D6;color:#4A4F5C}
-.after{top:690px;background:var(--gold);color:var(--navy)}
-.tag{display:inline-block;font-size:15px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;padding:7px 14px;border-radius:999px}
-.before .tag{background:#C9C4B2;color:#3A3D47}
-.after .tag{background:var(--navy);color:var(--gold)}
-.quote{margin-top:20px;font-family:Georgia,'Times New Roman',serif;font-size:38px;line-height:1.3}
-.note{margin-top:20px;font-size:23px;font-weight:600}
-.after .note{color:#3A2E05}
-.foot{position:absolute;left:72px;right:72px;bottom:44px;display:flex;justify-content:space-between;align-items:center}
-.foot p{font-size:20px;line-height:1.45;color:var(--slate);max-width:760px}
-.logo img{width:70px;height:70px;border-radius:14px}
+html,body{width:1080px;height:1350px;overflow:hidden;background:#EADFC6}
+body{position:relative;color:var(--navy);font-family:Georgia,'Times New Roman',serif;background-image:radial-gradient(rgba(0,0,0,.05) 1px, transparent 1px);background-size:14px 14px}
+.hand{font-family:'Ink Free','Segoe Print',cursive}
+.head{position:absolute;left:70px;top:56px;right:70px}
+.head .e{font-size:30px;color:#7A3B3B;transform:rotate(-1.5deg);display:inline-block}
+.head h1{margin-top:2px;font-size:64px;line-height:1.02;text-wrap:balance;font-weight:700;letter-spacing:-.015em}
+.sheet{position:absolute;left:70px;right:70px;top:300px;background:var(--paper);padding:48px 50px 54px;box-shadow:0 18px 34px rgba(0,0,0,.25);transform:rotate(-.8deg);border-radius:4px}
+.sheet .tag{font-family:'Segoe UI',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#6B5A2E}
+.quote{margin-top:16px;font-size:44px;line-height:1.38}
+.x{text-decoration:line-through;text-decoration-color:var(--red);text-decoration-thickness:6px}
+.ann{position:absolute;color:var(--red);font-size:34px;line-height:1.05}
+.sticky{position:absolute;left:150px;right:90px;top:760px;background:var(--gold);padding:70px 52px 50px;transform:rotate(1.6deg);box-shadow:0 20px 34px rgba(0,0,0,.3)}
+.sticky:before{content:"";position:absolute;left:50%;top:-20px;width:150px;height:40px;margin-left:-75px;background:rgba(246,238,219,.75);transform:rotate(-2deg)}
+.sticky .tag{position:absolute;left:52px;top:24px;font-family:'Segoe UI',Arial,sans-serif;font-size:15px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#3A2E05}
+.sticky .q{font-size:42px;line-height:1.3;color:var(--navy)}
+.sticky .more{margin-top:22px;font-size:34px;color:#7A1F23;transform:rotate(-1deg)}
+.foot{position:absolute;left:70px;right:70px;bottom:44px;display:flex;justify-content:space-between;align-items:center;font-size:22px;font-style:italic;color:#3B4558}
+.foot img{width:64px;height:64px;border-radius:12px}
 </style></head><body>
-<div class="band"></div>
-<div class="head">
-  <div class="eyebrow">Funder story, before and after</div>
-  <h1>Say it so they can <em>picture it.</em></h1>
+<div class="head"><div class="e hand">funder story, edited</div><h1>Say it so they can picture it.</h1></div>
+
+<div class="sheet">
+  <div class="tag">Before</div>
+  <div class="quote">&ldquo;Our organisation <span class="x">empowers vulnerable communities</span> through <span class="x">sustainable livelihoods programming</span>.&rdquo;</div>
 </div>
-<div class="box before">
-  <span class="tag">Before</span>
-  <div class="quote">&ldquo;Our organisation empowers vulnerable communities through sustainable livelihoods programming.&rdquo;</div>
-  <div class="note">Nobody can picture it. Nobody can check it.</div>
+<div class="ann hand" style="left:640px;top:232px;transform:rotate(-5deg)">who? where?</div>
+<div class="ann hand" style="left:610px;top:612px;transform:rotate(-4deg)">can't picture this.<br>can't check it.</div>
+
+<div class="sticky">
+  <div class="tag">After</div>
+  <div class="q hand">Grace sold tomatoes from a basket by the road, and lost a day&rsquo;s stock every time it rained. Our team helped her savings group build a covered stand.</div>
+  <div class="more hand">+ one number, with its date. + one ask.</div>
 </div>
-<div class="box after">
-  <span class="tag">After</span>
-  <div class="quote">&ldquo;Grace sold tomatoes from a basket by the road, and lost a day&rsquo;s stock every time it rained. Our team helped her savings group build a covered stand.&rdquo;</div>
-  <div class="note">Add one number and one ask, and you have your page.</div>
-</div>
-<div class="foot">
-  <p>Grace is made up. Use a real name, with permission, and a real number with its date.</p>
-  <div class="logo"><img src="assets/speakpower-logo.png" alt="SpeakPower"></div>
-</div>
+
+<div class="foot"><span>Grace is made up. Use a real name, with permission.</span><img src="assets/speakpower-logo.png" alt="SpeakPower"></div>
 </body></html>

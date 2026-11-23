@@ -11,7 +11,7 @@ Draft, never live. About 1,000 words in Tom's voice, for SpeakPower's LinkedIn a
 | `everyone-says-lead-with-one-story.docx` / `.pdf` | A4 Word edition and the PDF Word exported from it, 6 pages, with cover photo, graphics and author card. |
 | `linkedin-upload/` | Plain-text article with image markers, plain-text feed post, numbered images, and `0-HOW-TO-PUBLISH.txt`. Text and images are kept apart because pasting rich text into LinkedIn failed. |
 | `linkedin-feed-post.md` | Teaser post and two follow-up captions (same text as the `.txt`). |
-| `images/` | Hero, two-studies graphic, five-part framework, before-and-after card, plus the two human photos. |
+| `images/` | Hero, two-studies graphic, five-part framework, before-and-after card, plus your author portrait. |
 | `src/` | HTML for each graphic and the scripts that rebuild everything. |
 
 ## Check these before it goes live
@@ -26,11 +26,11 @@ Draft, never live. About 1,000 words in Tom's voice, for SpeakPower's LinkedIn a
 4. **"I haven't found a study that tests funders reading proposals."** True of my search, which was short. Do not claim more.
 5. **The scope-insensitivity line** ("your 10,000 beneficiaries line may not be working") is my inference from the repeat's framing, worded as "if that's true". Cut it if it feels like a stretch.
 6. **Grace and the before-and-after lines are made up**, and the article says so in the text and on the card. No client is named.
-7. **The cover photo and your portrait** are the same two images used for the audit article. The cover photo's source is unknown (stock or AI-made), so check its licence. Swap in a headshot if you have one.
+7. **Human photos.** Only your portrait appears, in the author card. You asked for a different look from the audit article, so I dropped the repeated stock photo. Three free Pexels photos are proposed (5387240, 6472412, 9090855) and need your approval before I download any. Swap in a headshot if you have one.
 
 ## Design notes
 
-- Same palette and typography as the audit article, so the two read as a series.
+- **Visual concept: paper and ink.** Gold and cream with navy ink and red-pen edits, Georgia headlines and Ink Free handwriting, pinned index cards, one A4 page with margin notes, a sticky note. It is deliberately unlike the audit article (dark navy cards, Bahnschrift). The only shared cues are the small logo badge and the brand colours. See `.claude/skills/tom-voice-article-writer/references/visual-log.md`.
 - Every figure on the graphics is a verified fact from the papers. No percentages are invented; the "two studies" graphic is a comparison of method and result, not a chart of numbers.
 - The Word edition moves the five-part graphic ahead of its list so it fits on page 3. Page 4 has some white space at the bottom, because the before-and-after card does not fit under it.
 

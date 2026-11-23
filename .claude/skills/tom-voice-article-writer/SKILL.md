@@ -69,6 +69,18 @@ Write to `lab/<article-folder>/` (never live):
 
 The build scripts are in `lab/article-comms-audit/src/` (`render.ps1`, `build-html.ps1`, `prep-photos.ps1`, `build-docx.js`, `export-pdf.ps1`, `build-linkedin.ps1`). Reuse them. When this skill is promoted, copy them into the skill's `scripts/` folder.
 
+## Visual variety (hard rule, added after Tom said the second article looked like a copy of the first)
+
+Every article gets its own visual identity. Two articles side by side must not look like the same template.
+
+1. **Read `references/visual-log.md` before designing anything.** It lists the concept, typography and photos used by each earlier article.
+2. **Pick a concept not yet used** and write it into the log before you start. Concepts to rotate through: dark cards and dashboard; paper and ink (handwriting, sticky notes, red-pen edits); editorial photo poster; field notebook (maps, sketches); bold typographic poster; geometric blocks; Swiss grid data poster. Invent others.
+3. **Brand anchors are only these:** navy and gold somewhere, and the small logo badge. Everything else changes between articles: dominant colour, layout, type pairing, illustration style, how the framework graphic is drawn. A grid of numbered cards is allowed once.
+4. **Photos are never reused** across articles, except Tom's author portrait. The cover must not be the previous article's cover.
+5. **Where photos come from, in order:** Tom's own files; free-licence stock (Pexels, Unsplash) that Tom has approved by file name, source and size before any download; AI generation only if a generator works. Avoid photos of children and of real people presented as a specific beneficiary.
+6. **Before presenting, put the new cover next to the last one.** If a stranger would call them the same series template, redo them.
+7. Add the new article's row to the visual log in the same commit.
+
 ## Guardrails
 
 - Never invent figures, client results or partnerships. Name unverified numbers in the README and ask Tom to confirm them against his analytics before publishing.

@@ -91,8 +91,8 @@ const kids = [];
 kids.push(new Paragraph({
   spacing: { after: 200 },
   children: [new ImageRun({
-    type: 'jpg', data: read('05-cover-photo.jpg'), transformation: { width: 642, height: 282 },
-    altText: { title: 'Cover photo', description: 'A smiling woman working on a laptop in a meeting room, with charts and sticky notes pinned to boards behind her.', name: '05-cover-photo.jpg' },
+    type: 'png', data: read('01-hero.png'), transformation: { width: 642, height: 335 },
+    altText: { title: 'Cover', description: 'A gold and navy cover with a ruled funding proposal page. The words lead with one story are circled in red pen with a note asking who says so, and a sticky note asks what they tested.', name: '01-hero.png' },
   })],
 }));
 

@@ -23,7 +23,6 @@ $map = [ordered]@{
   '2-two-studies.png'           = @('02-two-studies.png', 1200)
   '3-five-parts.png'           = @('03-five-parts.png', 1200)
   '4-before-after.png'         = @('04-before-after.png', 1080)
-  'extra-cover-photo.jpg'       = @('05-cover-photo.jpg', 1200)
   'extra-author-photo.png'      = @('06-author-tom.png', 400)
 }
 foreach ($k in $map.Keys) {
